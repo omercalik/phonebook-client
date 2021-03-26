@@ -22,7 +22,7 @@ function App() {
         console.log(res)
         setPersons(res)
       })
-      .catch((err) => console.log(err))
+      .catch((err) => console.log(err.response))
   }, [])
 
   const callBack = (val) => {
