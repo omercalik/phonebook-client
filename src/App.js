@@ -10,7 +10,7 @@ function App() {
 
   const handleDelete = (id) => {
     axios
-      .delete(`http://localhost:3001/api/persons/${id}`)
+      .delete(`https://fierce-badlands-58853.herokuapp.com/api/persons/${id}`)
       .then((res) => {
         console.log(res)
       })
