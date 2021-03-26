@@ -36,5 +36,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://fierce-badlands-58853.herokuapp.com/"
+  "proxy": "https://fierce-badlands-58853.herokuapp.com/api"
 }

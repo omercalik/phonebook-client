@@ -10,7 +10,7 @@ function App() {
 
   const handleDelete = (id) => {
     axios
-      .delete(`/api/persons/${id}`)
+      .delete(`/persons/${id}`)
       .then((res) => {
         console.log(res)
       })
