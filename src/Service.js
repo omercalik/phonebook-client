@@ -4,10 +4,8 @@ const baseUrl = "https://fierce-badlands-58853.herokuapp.com/api/persons"
 
 const getAll = () => {
   const request = axios.get(baseUrl)
-  console.log(request)
   return request
     .then((response) => {
-      console.log(response)
       return response.data
     })
     .catch((err) => console.log(err))
@@ -19,7 +17,10 @@ const create = (newObject) => {
     .then((res) => {
       return res.data
     })
-    .catch((err) => console.log(err))
+    .catch((err) => {
+      console.log(err.response)
+      return err.response
+    })
 }
 
 const deleteContact = (id) => {

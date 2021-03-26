@@ -19,7 +19,6 @@ function App() {
   useEffect(() => {
     Service.getAll()
       .then((res) => {
-        console.log(res)
         setPersons(res)
       })
       .catch((err) => console.log(err.response))

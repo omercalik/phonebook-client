@@ -36,13 +36,17 @@ const PersonForm = ({ persons, cb }) => {
         <button
           onClick={(e) => {
             e.preventDefault()
+            console.log(persons)
+
             const found = persons.some(
               (person) => person.name === newName && person.number === newPhone
             )
             const found2 = persons.some(
               (person) => person.name === newName && person.number !== newPhone
             )
+
             if (found) {
+              console.log(persons)
               setAlertMessage({
                 message: `${newName} is already on the  phonebook`,
                 status: "error",
@@ -63,11 +67,12 @@ const PersonForm = ({ persons, cb }) => {
                   number: newPhone,
                 })
                   .then((response) => {
-                    cb(
-                      persons.map((person) =>
-                        person.id !== toUpdate.id ? person : response.data
-                      )
+                    console.log(response)
+                    let updatedPersons = persons.map((person) =>
+                      person.id !== toUpdate.id ? person : response
                     )
+                    console.log(updatedPersons)
+                    cb(updatedPersons)
                     setAlertMessage({
                       message: `${newName} updated successfully`,
                       status: "success",
@@ -86,18 +91,28 @@ const PersonForm = ({ persons, cb }) => {
               }
             } else {
               const newContact = { name: newName, number: newPhone }
+
               Service.create(newContact)
                 .then((addedContact) => {
-                  cb(persons.concat(addedContact))
-                  setAlertMessage({
-                    message: `${newName} successfully added to phonebook.`,
-                    status: "success",
-                  })
+                  if (addedContact.status === 400) {
+                    setAlertMessage({
+                      message: addedContact.data.errors
+                        ? addedContact.data.message
+                        : addedContact.data.error,
+                      status: "error",
+                    })
+                  } else {
+                    setAlertMessage({
+                      message: `${newName} successfully added to phonebook.`,
+                      status: "success",
+                    })
+                    cb(persons.concat(addedContact))
+                  }
                 })
                 .catch((err) => {
-                  console.log(err.response)
+                  console.log(err)
                   setAlertMessage({
-                    message: `${err.response.data.message}`,
+                    message: `day`,
                     status: "error",
                   })
                 })
@@ -107,6 +122,7 @@ const PersonForm = ({ persons, cb }) => {
         >
           add
         </button>
+        <p>debug:{newName}</p>
       </div>
     </form>
   )
