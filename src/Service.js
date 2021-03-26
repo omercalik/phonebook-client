@@ -1,6 +1,6 @@
 import axios from "axios"
 
-const baseUrl = "https://fierce-badlands-58853.herokuapp.com/api/persons"
+const baseUrl = "api/persons"
 
 const getAll = () => {
   const request = axios.get(baseUrl)
@@ -10,11 +10,7 @@ const getAll = () => {
 }
 
 const create = (newObject) => {
-  const request = axios.post(baseUrl, newObject, {
-    headers: {
-      "content-type": "application/json",
-    },
-  })
+  const request = axios.post(baseUrl, newObject)
   return request
     .then((res) => {
       return res.data
